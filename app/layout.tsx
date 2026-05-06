@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
     default: SITE.name,
-    template: `%s — ${SITE.name}`,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   openGraph: {
@@ -30,7 +30,15 @@ export const metadata: Metadata = {
     title: SITE.name,
     description: SITE.description,
     url: SITE.url,
+    images: [{ url: '/images/og-default.png', width: 1200, height: 630, alt: SITE.name }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE.name,
+    description: SITE.description,
+    images: ['/images/og-default.png'],
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
