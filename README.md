@@ -29,15 +29,15 @@ Le site est accessible sur [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Commande           | Description                          |
-| ------------------ | ------------------------------------ |
-| `pnpm dev`         | Dev server (Turbopack)               |
-| `pnpm build`       | Build de production                  |
-| `pnpm start`       | Start du build                       |
-| `pnpm lint`        | ESLint (next/core-web-vitals + ts)   |
-| `pnpm typecheck`   | `tsc --noEmit`                       |
-| `pnpm format`      | Prettier write                       |
-| `pnpm format:check`| Prettier check                       |
+| Commande            | Description                        |
+| ------------------- | ---------------------------------- |
+| `pnpm dev`          | Dev server (Turbopack)             |
+| `pnpm build`        | Build de production                |
+| `pnpm start`        | Start du build                     |
+| `pnpm lint`         | ESLint (next/core-web-vitals + ts) |
+| `pnpm typecheck`    | `tsc --noEmit`                     |
+| `pnpm format`       | Prettier write                     |
+| `pnpm format:check` | Prettier check                     |
 
 ## Variables d'environnement
 
