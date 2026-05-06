@@ -1,7 +1,12 @@
 import 'server-only'
 
 import { sanityClient } from './client'
-import { siteSettingsQuery } from './queries'
+import {
+  allArticlesQuery,
+  allDisciplinesQuery,
+  featuredArticlesQuery,
+  siteSettingsQuery,
+} from './queries'
 import { readToken } from '@/sanity/env'
 
 type SiteSettings = {
@@ -23,4 +28,24 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     {},
     { next: { revalidate: 60, tags: ['siteSettings'] } },
   )
+}
+
+export async function getDisciplines() {
+  return serverClient.fetch(
+    allDisciplinesQuery,
+    {},
+    { next: { revalidate: 300, tags: ['discipline'] } },
+  )
+}
+
+export async function getFeaturedArticles() {
+  return serverClient.fetch(
+    featuredArticlesQuery,
+    {},
+    { next: { revalidate: 300, tags: ['article'] } },
+  )
+}
+
+export async function getAllArticles() {
+  return serverClient.fetch(allArticlesQuery, {}, { next: { revalidate: 300, tags: ['article'] } })
 }
