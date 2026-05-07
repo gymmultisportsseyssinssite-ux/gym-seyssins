@@ -1,21 +1,43 @@
 import { PortableText as PortableTextRoot, type PortableTextComponents } from '@portabletext/react'
 import type { PortableTextBlock } from 'sanity'
 
+import { slugifyHeading } from '@/lib/format'
+
 import { SanityImage } from './SanityImage'
+
+function childrenToString(children: React.ReactNode): string {
+  if (typeof children === 'string') return children
+  if (Array.isArray(children)) return children.map(childrenToString).join('')
+  if (children && typeof children === 'object' && 'props' in children) {
+    return childrenToString((children as { props: { children: React.ReactNode } }).props.children)
+  }
+  return ''
+}
 
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
       <p className="text-foreground/90 text-base leading-relaxed">{children}</p>
     ),
-    h2: ({ children }) => (
-      <h2 className="font-display text-foreground mt-12 mb-4 text-[length:var(--text-2xl)]">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="font-display text-foreground mt-8 mb-3 text-xl">{children}</h3>
-    ),
+    h2: ({ children }) => {
+      const id = slugifyHeading(childrenToString(children))
+      return (
+        <h2
+          id={id}
+          className="font-display text-foreground mt-12 mb-4 scroll-mt-24 text-[length:var(--text-2xl)]"
+        >
+          {children}
+        </h2>
+      )
+    },
+    h3: ({ children }) => {
+      const id = slugifyHeading(childrenToString(children))
+      return (
+        <h3 id={id} className="font-display text-foreground mt-8 mb-3 scroll-mt-24 text-xl">
+          {children}
+        </h3>
+      )
+    },
     blockquote: ({ children }) => (
       <blockquote className="border-primary bg-card/60 text-foreground/90 before:font-display before:text-primary my-8 border-l-4 px-6 py-5 text-lg italic before:mr-2 before:text-3xl before:leading-none before:content-['“']">
         {children}

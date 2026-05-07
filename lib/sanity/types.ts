@@ -122,3 +122,102 @@ export type DocumentTelechargeable = {
   fichierExtension: string | null
   fichierTaille: number | null
 }
+
+// =====================================================================
+// Articles
+// =====================================================================
+
+export type ArticleAuthor = {
+  _id: string
+  prenom: string | null
+  nom: string | null
+  photo?: SanityImage | null
+}
+
+export type ArticleListItem = {
+  _id: string
+  titre: string | null
+  slug: string | null
+  datePublication: string | null
+  dateEvenement: string | null
+  chapo: string | null
+  categorie: ArticleCategorie | null
+  featured: boolean | null
+  imagePrincipale: SanityImage | null
+}
+
+export type ArticleDetail = ArticleListItem & {
+  contenu: RichText | null
+  auteur: ArticleAuthor | null
+}
+
+export type ArticleBySlugResult = {
+  article: ArticleDetail | null
+  articlesLies: ArticleListItem[] | null
+}
+
+// =====================================================================
+// Professeurs (avec cours détaillés)
+// =====================================================================
+
+export type ProfesseurCoursLite = {
+  _id: string
+  titre: string | null
+  jour: CoursJour | null
+  heureDebut: string | null
+  heureFin: string | null
+  lieu: string | null
+  discipline: {
+    _id: string
+    nom: string | null
+    slug: string | null
+    couleur: string | null
+  } | null
+}
+
+export type ProfesseurWithCours = {
+  _id: string
+  prenom: string | null
+  nom: string | null
+  photo?: SanityImage | null
+  bio: RichText | null
+  ordre: number | null
+  specialites:
+    | { _id: string; nom: string | null; slug: string | null; couleur: string | null }[]
+    | null
+  cours: ProfesseurCoursLite[]
+}
+
+// =====================================================================
+// Galeries
+// =====================================================================
+
+export type GaleriePhoto = {
+  _key?: string
+  _type?: 'image'
+  asset: { _ref?: string; _id?: string; url?: string }
+  alt: string
+  legende?: string
+  hotspot?: { x: number; y: number; height?: number; width?: number }
+}
+
+export type GalerieListItem = {
+  _id: string
+  titre: string | null
+  slug: string | null
+  date: string | null
+  description: string | null
+  coverImage: SanityImage | null
+  nombrePhotos: number | null
+}
+
+export type GalerieDetail = {
+  _id: string
+  titre: string | null
+  slug: string | null
+  date: string | null
+  description: string | null
+  coverImage: SanityImage | null
+  photos: GaleriePhoto[] | null
+  evenementLie: { _id: string; titre: string | null; slug: string | null } | null
+}

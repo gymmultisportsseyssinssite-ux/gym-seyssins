@@ -291,3 +291,104 @@ export const certificatMedicalDocumentQuery = defineQuery(`
     "fichierTaille": fichier.asset->size
   }
 `)
+
+// =====================================================================
+// Articles paginés (page /actualites). On en a deux versions selon le tri,
+// car GROQ ne permet pas un order() paramétré dynamiquement.
+// Args communs : $start (number), $end (number), $categorie (string|null)
+// =====================================================================
+export const allArticlesPaginatedDescQuery = defineQuery(`
+  {
+    "items": *[
+      _type == "article"
+      && (!defined($categorie) || categorie == $categorie)
+    ] | order(datePublication desc)[$start...$end]{
+      _id,
+      titre,
+      "slug": slug.current,
+      datePublication,
+      dateEvenement,
+      chapo,
+      categorie,
+      featured,
+      imagePrincipale{ ..., asset->, alt }
+    },
+    "total": count(*[
+      _type == "article"
+      && (!defined($categorie) || categorie == $categorie)
+    ])
+  }
+`)
+
+export const allArticlesPaginatedAscQuery = defineQuery(`
+  {
+    "items": *[
+      _type == "article"
+      && (!defined($categorie) || categorie == $categorie)
+    ] | order(datePublication asc)[$start...$end]{
+      _id,
+      titre,
+      "slug": slug.current,
+      datePublication,
+      dateEvenement,
+      chapo,
+      categorie,
+      featured,
+      imagePrincipale{ ..., asset->, alt }
+    },
+    "total": count(*[
+      _type == "article"
+      && (!defined($categorie) || categorie == $categorie)
+    ])
+  }
+`)
+
+// Tous les slugs d'articles publiés (pour generateStaticParams + sitemap)
+export const allArticleSlugsQuery = defineQuery(`
+  *[_type == "article" && defined(slug.current)]{ "slug": slug.current }
+`)
+
+// Tous les slugs de galeries
+export const allGalerieSlugsQuery = defineQuery(`
+  *[_type == "galeriePhoto" && defined(slug.current)]{ "slug": slug.current }
+`)
+
+// =====================================================================
+// Professeurs avec cours détaillés (jour + heure + discipline)
+// =====================================================================
+export const allProfesseursWithCoursDetailsQuery = defineQuery(`
+  *[_type == "professeur"] | order(ordre asc, nom asc){
+    _id,
+    prenom,
+    nom,
+    photo{ ..., asset->, alt },
+    bio,
+    ordre,
+    specialites[]->{
+      _id,
+      nom,
+      "slug": slug.current,
+      couleur
+    },
+    "cours": *[_type == "cours" && references(^._id)] | order(
+      select(
+        jour == "lundi" => 1,
+        jour == "mardi" => 2,
+        jour == "mercredi" => 3,
+        jour == "jeudi" => 4,
+        jour == "vendredi" => 5,
+        jour == "samedi" => 6,
+        99
+      ) asc,
+      heureDebut asc
+    ){
+      _id,
+      titre,
+      jour,
+      heureDebut,
+      heureFin,
+      lieu,
+      discipline->{ _id, nom, "slug": slug.current, couleur }
+    }
+  }
+`)
