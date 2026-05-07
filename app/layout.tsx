@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Fraunces, Inter } from 'next/font/google'
+import { Inter, Source_Serif_4 } from 'next/font/google'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { SITE } from '@/lib/constants'
 import './globals.css'
 
@@ -9,11 +10,10 @@ const inter = Inter({
   variable: '--font-sans',
 })
 
-const fraunces = Fraunces({
+const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
-  axes: ['opsz', 'SOFT'],
 })
 
 export const metadata: Metadata = {
@@ -43,8 +43,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${fraunces.variable} h-full`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html lang="fr" className={`${inter.variable} ${sourceSerif.variable} h-full`}>
+      <body className="flex min-h-full flex-col">
+        <NuqsAdapter>{children}</NuqsAdapter>
+      </body>
     </html>
   )
 }

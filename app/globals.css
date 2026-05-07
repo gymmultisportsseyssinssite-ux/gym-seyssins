@@ -8,33 +8,37 @@
    Couleurs en oklch / hex pour que shadcn puisse les consommer.
    ===================================================================== */
 :root {
-  --background: #faf7f2;
-  --foreground: #2a2622;
+  /* Bg / Foreground — blanc cassé + noir bleuté */
+  --background: #fafaf7;
+  --foreground: #0f1419;
 
   --card: #ffffff;
-  --card-foreground: #2a2622;
+  --card-foreground: #0f1419;
 
   --popover: #ffffff;
-  --popover-foreground: #2a2622;
+  --popover-foreground: #0f1419;
 
-  --primary: #c66b4f;
+  /* Primary — bleu royal (fiabilité, communauté) */
+  --primary: #1e5ba8;
   --primary-foreground: #ffffff;
 
-  --secondary: #8fa68e;
+  /* Secondary / Accent — orange vif (énergie, action) */
+  --secondary: #ff7a1a;
   --secondary-foreground: #ffffff;
 
-  --muted: #f0e8db;
-  --muted-foreground: #6b6259;
-
-  --accent: #8fa68e;
+  --accent: #ff7a1a;
   --accent-foreground: #ffffff;
 
-  --destructive: #b3322c;
+  /* Muted — gris bleuté très clair */
+  --muted: #eef1f5;
+  --muted-foreground: #4a5568;
+
+  --destructive: #c43232;
   --destructive-foreground: #ffffff;
 
-  --border: #e8dfd3;
-  --input: #e8dfd3;
-  --ring: #c66b4f;
+  --border: #e2e7ee;
+  --input: #e2e7ee;
+  --ring: #1e5ba8;
 
   --radius: 0.75rem;
 }
@@ -54,7 +58,7 @@
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary-hover: #b25a40;
+  --color-primary-hover: #174687;
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -74,8 +78,8 @@
 
   --color-bg: var(--background);
   --color-bg-elevated: #ffffff;
-  --color-success: #6b8e5a;
-  --color-warning: #d4a05c;
+  --color-success: #2e9456;
+  --color-warning: #f5b800;
 
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);

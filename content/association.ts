@@ -20,7 +20,7 @@ export const associationContent = {
     title: 'Une histoire sportive, une famille seyssinoise.',
     subtitle:
       'Depuis plus de 30 ans, la Gym Multisport Seyssins rassemble celles et ceux qui veulent bouger ensemble, apprendre et progresser à leur rythme.',
-    image: { src: '/images/association-hero.svg', alt: 'Adhérents en cours collectif' },
+    image: { src: '/images/association-hero.jpg', alt: 'Adhérents en cours collectif' },
   },
   histoire: {
     title: 'Notre histoire',
@@ -60,25 +60,25 @@ export const associationContent = {
     {
       nom: 'Marie Dubois',
       role: 'Présidente',
-      photo: '/images/bureau-1.svg',
+      photo: '/images/bureau-1.jpg',
       bio: 'Adhérente depuis 2010, Marie a pris la présidence en 2022 avec l’envie de moderniser l’association tout en préservant son esprit familial.',
     },
     {
       nom: 'Jean-Pierre Martin',
       role: 'Trésorier',
-      photo: '/images/bureau-2.svg',
+      photo: '/images/bureau-2.jpg',
       bio: 'Comptable de métier, Jean-Pierre veille depuis cinq ans à la santé financière de l’association.',
     },
     {
       nom: 'Sylvie Bernard',
       role: 'Secrétaire',
-      photo: '/images/bureau-3.svg',
+      photo: '/images/bureau-3.jpg',
       bio: 'Sylvie coordonne la communication et la vie quotidienne du bureau. Elle pratique le Pilates depuis dix ans.',
     },
     {
       nom: 'Antoine Roux',
       role: 'Membre du bureau',
-      photo: '/images/bureau-4.svg',
+      photo: '/images/bureau-4.jpg',
       bio: 'Antoine s’occupe des relations avec la mairie et de la logistique des événements.',
     },
   ] satisfies readonly Membre[],

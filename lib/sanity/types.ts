@@ -25,3 +25,100 @@ export type DocumentCategorie = 'inscription' | 'règlement' | 'médical' | 'aut
 export type NiveauRequis = 'tous' | 'débutant' | 'intermédiaire' | 'avancé'
 
 export type RichText = PortableTextBlock[]
+
+// =====================================================================
+// Types métier — utilisés par les composants client (planning, modales)
+// =====================================================================
+
+export const JOURS_ORDRE: CoursJour[] = [
+  'lundi',
+  'mardi',
+  'mercredi',
+  'jeudi',
+  'vendredi',
+  'samedi',
+]
+
+export const JOUR_LABEL: Record<CoursJour, string> = {
+  lundi: 'Lundi',
+  mardi: 'Mardi',
+  mercredi: 'Mercredi',
+  jeudi: 'Jeudi',
+  vendredi: 'Vendredi',
+  samedi: 'Samedi',
+}
+
+export const NIVEAU_LABEL: Record<NiveauRequis, string> = {
+  tous: 'Tous niveaux',
+  débutant: 'Débutant',
+  intermédiaire: 'Intermédiaire',
+  avancé: 'Avancé',
+}
+
+export const CATEGORIE_ARTICLE_LABEL: Record<ArticleCategorie, string> = {
+  actualité: 'Actualité',
+  événement: 'Événement',
+  communiqué: 'Communiqué',
+}
+
+export type DisciplineRef = {
+  _id: string
+  nom: string | null
+  slug: string | null
+  couleur: string | null
+  niveauRequis: NiveauRequis | null
+}
+
+export type ProfesseurRef = {
+  _id: string
+  prenom: string | null
+  nom: string | null
+  photo?: SanityImage | null
+}
+
+export type CoursWithDetails = {
+  _id: string
+  titre: string | null
+  jour: CoursJour | null
+  heureDebut: string | null
+  heureFin: string | null
+  lieu: string | null
+  placesMax: number | null
+  placesRestantes: number | null
+  statut: CoursStatut | null
+  description: RichText | null
+  ordre: number | null
+  discipline: DisciplineRef | null
+  professeur: ProfesseurRef | null
+}
+
+export type CoursLite = {
+  _id: string
+  titre: string | null
+  jour: CoursJour | null
+  heureDebut: string | null
+  heureFin: string | null
+  lieu: string | null
+  professeur: { _id: string; prenom: string | null; nom: string | null } | null
+}
+
+export type DisciplineWithCours = {
+  _id: string
+  nom: string | null
+  slug: string | null
+  description: RichText | null
+  couleur: string | null
+  niveauRequis: NiveauRequis | null
+  icone?: SanityImage | null
+  cours: CoursLite[]
+}
+
+export type DocumentTelechargeable = {
+  _id: string
+  titre: string | null
+  description: string | null
+  saison: string | null
+  fichierUrl: string | null
+  fichierExtension: string | null
+  fichierTaille: number | null
+}

@@ -222,3 +222,72 @@ export const galerieBySlugQuery = defineQuery(`
     }
   }
 `)
+
+// =====================================================================
+// Requêtes /cours
+// =====================================================================
+
+// Disciplines avec leurs cours associés (pour la section "Disciplines détaillées")
+export const disciplinesWithCoursListQuery = defineQuery(`
+  *[_type == "discipline"] | order(nom asc){
+    _id,
+    nom,
+    "slug": slug.current,
+    description,
+    couleur,
+    niveauRequis,
+    icone{ ..., asset-> },
+    "cours": *[_type == "cours" && references(^._id)] | order(
+      select(
+        jour == "lundi" => 1,
+        jour == "mardi" => 2,
+        jour == "mercredi" => 3,
+        jour == "jeudi" => 4,
+        jour == "vendredi" => 5,
+        jour == "samedi" => 6,
+        99
+      ) asc,
+      heureDebut asc
+    ){
+      _id,
+      titre,
+      jour,
+      heureDebut,
+      heureFin,
+      lieu,
+      professeur->{
+        _id,
+        prenom,
+        nom
+      }
+    }
+  }
+`)
+
+// Document d'inscription le plus récent (PDF)
+export const inscriptionDocumentLatestQuery = defineQuery(`
+  *[_type == "documentTelechargeable" && categorie == "inscription"]
+  | order(_createdAt desc)[0]{
+    _id,
+    titre,
+    description,
+    saison,
+    "fichierUrl": fichier.asset->url,
+    "fichierExtension": fichier.asset->extension,
+    "fichierTaille": fichier.asset->size
+  }
+`)
+
+// Document certificat médical type
+export const certificatMedicalDocumentQuery = defineQuery(`
+  *[_type == "documentTelechargeable" && categorie == "médical"]
+  | order(_createdAt desc)[0]{
+    _id,
+    titre,
+    description,
+    saison,
+    "fichierUrl": fichier.asset->url,
+    "fichierExtension": fichier.asset->extension,
+    "fichierTaille": fichier.asset->size
+  }
+`)

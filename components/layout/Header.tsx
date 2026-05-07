@@ -52,16 +52,9 @@ export function Header({ inscriptionsOuvertes = false }: HeaderProps) {
           aria-label={`${SITE_NAME} — accueil`}
           className="focus-visible:ring-ring flex items-center gap-3 rounded-md focus-visible:ring-2 focus-visible:ring-offset-2"
         >
-          <Image
-            src="/images/logo.svg"
-            alt=""
-            width={44}
-            height={44}
-            className="size-10 md:size-11"
-            priority
-          />
-          <span className="font-display text-lg font-medium tracking-tight md:text-xl">
-            <span className="hidden sm:inline">Gym Multisport </span>Seyssins
+          <Image src="/images/logo.svg" alt="" width={36} height={36} className="size-9" priority />
+          <span className="font-display text-base font-semibold tracking-tight whitespace-nowrap md:text-lg">
+            <span className="hidden md:inline">Gym Multisport </span>Seyssins
           </span>
         </Link>
 

@@ -3,8 +3,12 @@ import 'server-only'
 import { sanityClient } from './client'
 import {
   allArticlesQuery,
+  allCoursWithDetailsQuery,
   allDisciplinesQuery,
+  certificatMedicalDocumentQuery,
+  disciplinesWithCoursListQuery,
   featuredArticlesQuery,
+  inscriptionDocumentLatestQuery,
   siteSettingsQuery,
 } from './queries'
 import { readToken } from '@/sanity/env'
@@ -35,6 +39,38 @@ export async function getDisciplines() {
     allDisciplinesQuery,
     {},
     { next: { revalidate: 300, tags: ['discipline'] } },
+  )
+}
+
+export async function getDisciplinesWithCours() {
+  return serverClient.fetch(
+    disciplinesWithCoursListQuery,
+    {},
+    { next: { revalidate: 300, tags: ['discipline', 'cours'] } },
+  )
+}
+
+export async function getAllCours() {
+  return serverClient.fetch(
+    allCoursWithDetailsQuery,
+    {},
+    { next: { revalidate: 300, tags: ['cours'] } },
+  )
+}
+
+export async function getInscriptionDocument() {
+  return serverClient.fetch(
+    inscriptionDocumentLatestQuery,
+    {},
+    { next: { revalidate: 300, tags: ['documentTelechargeable'] } },
+  )
+}
+
+export async function getCertificatMedicalDocument() {
+  return serverClient.fetch(
+    certificatMedicalDocumentQuery,
+    {},
+    { next: { revalidate: 300, tags: ['documentTelechargeable'] } },
   )
 }
 

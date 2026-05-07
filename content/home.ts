@@ -4,7 +4,7 @@ export const homeContent = {
     title: 'Le sport au cœur de la convivialité.',
     subtitle:
       'Depuis plus de 30 ans, nous proposons une dizaine de disciplines sportives pour tous les niveaux et tous les âges.',
-    image: { src: '/images/hero.svg', alt: 'Cours de gymnastique à Seyssins' },
+    image: { src: '/images/hero.jpg', alt: 'Cours collectif de gymnastique douce' },
     primaryCta: { label: 'Découvrir nos cours', href: '/cours' },
     secondaryCta: { label: 'Nous contacter', href: '/contact' },
   },
@@ -17,8 +17,8 @@ export const homeContent = {
       'L’association est administrée par un bureau bénévole et soutenue par la mairie de Seyssins. Adhérer, c’est rejoindre une communauté qui prend soin de soi, et des autres.',
     ],
     images: [
-      { src: '/images/asso-1.svg', alt: 'Groupe de gymnastes en cours' },
-      { src: '/images/asso-2.svg', alt: 'Activité collective dans la salle' },
+      { src: '/images/asso-1.jpg', alt: 'Groupe de gymnastes en cours' },
+      { src: '/images/asso-2.jpg', alt: 'Activité collective dans la salle' },
     ],
     cta: { label: 'En savoir plus', href: '/association' },
   },
