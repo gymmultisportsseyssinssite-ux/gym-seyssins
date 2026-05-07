@@ -8,6 +8,7 @@ import {
   allArticlesQuery,
   allCoursWithDetailsQuery,
   allDisciplinesQuery,
+  allDocumentsQuery,
   allGalerieSlugsQuery,
   allGaleriesQuery,
   allProfesseursWithCoursDetailsQuery,
@@ -69,6 +70,14 @@ export async function getAllCours() {
 export async function getInscriptionDocument() {
   return serverClient.fetch(
     inscriptionDocumentLatestQuery,
+    {},
+    { next: { revalidate: 300, tags: ['documentTelechargeable'] } },
+  )
+}
+
+export async function getAllDocuments() {
+  return serverClient.fetch(
+    allDocumentsQuery,
     {},
     { next: { revalidate: 300, tags: ['documentTelechargeable'] } },
   )

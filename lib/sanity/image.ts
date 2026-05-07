@@ -22,3 +22,12 @@ export function urlFor(source: ImageLike) {
     .auto('format')
     .fit('max')
 }
+
+// Vérifie qu'une image a un asset référencé. Évite les crashs au build
+// quand un article publié avec une image manquante traîne en base.
+export function hasImageAsset(source: ImageLike | null | undefined): source is ImageLike {
+  if (!source) return false
+  const asset = source.asset
+  if (!asset) return false
+  return Boolean(asset._ref || asset._id || asset.url)
+}

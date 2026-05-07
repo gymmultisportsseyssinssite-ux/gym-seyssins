@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { urlFor } from '@/lib/sanity/image'
+import { hasImageAsset, urlFor } from '@/lib/sanity/image'
 import { cn } from '@/lib/utils'
 
 type SanityImageProps = {
@@ -25,7 +25,7 @@ export function SanityImage({
   className,
   priority = false,
 }: SanityImageProps) {
-  if (!value?.asset) return null
+  if (!hasImageAsset(value)) return null
 
   const builder = urlFor(value as Parameters<typeof urlFor>[0]).width(width)
   const url = (height ? builder.height(height) : builder).url()

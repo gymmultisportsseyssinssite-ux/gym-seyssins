@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { Toaster } from '@/components/ui/sonner'
 import { getSiteSettings } from '@/lib/sanity/fetch'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +22,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       </main>
 
       <Footer contactEmail={settings?.contactEmail} contactPhone={settings?.contactPhone} />
+      <Toaster richColors position="bottom-right" />
     </>
   )
 }

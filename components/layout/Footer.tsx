@@ -164,7 +164,7 @@ export function Footer({ contactEmail, contactPhone }: FooterProps) {
             </li>
             <li>
               <Link
-                href="/confidentialite"
+                href="/politique-confidentialite"
                 className="hover:text-background transition-colors hover:underline"
               >
                 Politique de confidentialité

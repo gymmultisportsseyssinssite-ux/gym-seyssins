@@ -15,7 +15,7 @@ import { SanityImage } from '@/components/shared/SanityImage'
 import { SITE } from '@/lib/constants'
 import { formatDateFR } from '@/lib/format'
 import { extractToc } from '@/lib/portable-text-utils'
-import { urlFor } from '@/lib/sanity/image'
+import { hasImageAsset, urlFor } from '@/lib/sanity/image'
 import { CATEGORIE_ARTICLE_LABEL, type ArticleBySlugResult } from '@/lib/sanity/types'
 import { getArticleBySlug, getAllArticleSlugs } from '@/lib/sanity/fetch'
 
@@ -35,9 +35,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const article = result?.article
   if (!article) return { title: 'Article introuvable' }
 
-  const ogImage = article.imagePrincipale
-    ? urlFor(article.imagePrincipale).width(1200).height(630).url()
-    : '/images/og-default.png'
+  const hasImage = hasImageAsset(article.imagePrincipale)
+  const ogImage = hasImage
+    ? urlFor(article.imagePrincipale!).width(1200).height(630).url()
+    : undefined
 
   return {
     title: article.titre ?? 'Article',
@@ -46,14 +47,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       type: 'article',
       title: article.titre ?? undefined,
       description: article.chapo ?? undefined,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: article.titre ?? '' }],
+      ...(ogImage
+        ? { images: [{ url: ogImage, width: 1200, height: 630, alt: article.titre ?? '' }] }
+        : {}),
       publishedTime: article.datePublication ?? undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title: article.titre ?? undefined,
       description: article.chapo ?? undefined,
-      images: [ogImage],
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   }
 }
@@ -77,8 +80,8 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
     headline: article.titre,
     description: article.chapo,
     datePublished: article.datePublication,
-    image: article.imagePrincipale
-      ? urlFor(article.imagePrincipale).width(1200).height(630).url()
+    image: hasImageAsset(article.imagePrincipale)
+      ? urlFor(article.imagePrincipale!).width(1200).height(630).url()
       : undefined,
     author: auteurNom
       ? { '@type': 'Person', name: auteurNom }
@@ -96,12 +99,12 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
       <JsonLd data={jsonLd} />
 
       {/* Hero image pleine largeur */}
-      {article.imagePrincipale ? (
+      {hasImageAsset(article.imagePrincipale) ? (
         <div className="bg-foreground relative w-full">
           <div className="relative aspect-[4/3] w-full md:aspect-[21/10]">
             <Image
-              src={urlFor(article.imagePrincipale).width(2100).url()}
-              alt={article.imagePrincipale.alt ?? article.titre ?? ''}
+              src={urlFor(article.imagePrincipale!).width(2100).url()}
+              alt={article.imagePrincipale!.alt ?? article.titre ?? ''}
               fill
               priority
               sizes="100vw"
