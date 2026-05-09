@@ -88,6 +88,35 @@ export const article = defineType({
       type: 'reference',
       to: [{ type: 'professeur' }],
     }),
+    defineField({
+      name: 'galerieInline',
+      title: 'Galerie de photos (en bas d’article)',
+      description:
+        'Photos additionnelles affichées en bas de l’article. Cliquer sur une photo ouvre la visionneuse plein écran. 3 photos minimum recommandées pour un bel effet.',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Texte alternatif',
+              description: 'Décrire la photo en quelques mots (accessibilité).',
+              validation: (Rule) => Rule.required().min(3),
+            },
+            {
+              name: 'legende',
+              type: 'string',
+              title: 'Légende (optionnelle)',
+              description: 'Affichée sous la photo en visionneuse plein écran.',
+            },
+          ],
+        },
+      ],
+      options: { layout: 'grid' },
+    }),
   ],
   orderings: [
     {

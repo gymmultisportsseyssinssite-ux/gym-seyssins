@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { CalendarDays, ListFilter } from 'lucide-react'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CoursDetailDialog } from '@/components/cours/CoursDetailDialog'
 import { InscriptionDialog } from '@/components/cours/InscriptionDialog'
 import { PlanningGrille } from '@/components/cours/PlanningGrille'
 import { PlanningListe } from '@/components/cours/PlanningListe'
+import { cn } from '@/lib/utils'
 import type { CoursWithDetails, DocumentTelechargeable } from '@/lib/sanity/types'
 
 type Props = {
@@ -15,7 +16,10 @@ type Props = {
   certificatDoc: DocumentTelechargeable | null
 }
 
+type View = 'grille' | 'liste'
+
 export function PlanningSection({ cours, inscriptionDoc, certificatDoc }: Props) {
+  const [view, setView] = useState<View>('grille')
   const [selectedCours, setSelectedCours] = useState<CoursWithDetails | null>(null)
   const [detailOpen, setDetailOpen] = useState(false)
   const [inscriptionOpen, setInscriptionOpen] = useState(false)
@@ -27,37 +31,70 @@ export function PlanningSection({ cours, inscriptionDoc, certificatDoc }: Props)
   const openInscription = () => setInscriptionOpen(true)
 
   return (
-    <section aria-labelledby="planning-title" className="bg-background">
-      <div className="container-content py-16 md:py-20">
-        <div className="mb-8 max-w-2xl">
-          <p className="text-primary text-sm font-medium tracking-wide uppercase">Planning</p>
-          <h2
-            id="planning-title"
-            className="font-display text-foreground mt-3 text-[length:var(--text-3xl)]"
-          >
-            Le planning de la semaine
-          </h2>
-          <p className="text-muted-foreground mt-4 text-lg">
-            Choisissez la vue qui vous convient. Cliquez sur un cours pour voir le détail.
+    <section
+      aria-labelledby="planning-title"
+      className="bg-card relative isolate"
+    >
+      <div className="container-content relative py-20 md:py-28">
+        {/* Header éditorial */}
+        <div className="mb-10 flex items-baseline gap-4 md:mb-14">
+          <p className="text-primary shrink-0 text-xs font-semibold tracking-[0.3em] uppercase">
+            — Planning
           </p>
+          <span
+            aria-hidden="true"
+            className="flex-1 border-t border-dashed border-[color:color-mix(in_oklab,var(--color-primary)_25%,transparent)]"
+          />
         </div>
 
-        <Tabs defaultValue="grille" className="w-full">
-          <TabsList className="mb-6 grid w-full grid-cols-2 md:max-w-sm">
-            <TabsTrigger value="grille">Vue grille</TabsTrigger>
-            <TabsTrigger value="liste">Vue liste</TabsTrigger>
-          </TabsList>
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <h2
+              id="planning-title"
+              className="font-display text-foreground text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] tracking-[-0.025em]"
+            >
+              Le planning de la semaine
+            </h2>
+            <p className="text-foreground/70 mt-5 text-lg leading-[1.6]">
+              Choisissez la vue qui vous convient. Cliquez sur un cours pour voir le détail.
+            </p>
+          </div>
 
-          <TabsContent value="grille" className="focus-visible:outline-none">
-            <PlanningGrille cours={cours} onSelectCours={openDetail} />
-            {/* Légende */}
-            <DisciplinesLegende cours={cours} />
-          </TabsContent>
+          {/* Toggle vue grille/liste, format pill éditorial */}
+          <div
+            role="tablist"
+            aria-label="Choisir la vue du planning"
+            className="border-foreground/10 bg-background/60 inline-flex shrink-0 items-center gap-1 rounded-full border p-1"
+          >
+            <ViewTab
+              value="grille"
+              current={view}
+              onClick={setView}
+              icon={<CalendarDays className="size-4" />}
+            >
+              Grille
+            </ViewTab>
+            <ViewTab
+              value="liste"
+              current={view}
+              onClick={setView}
+              icon={<ListFilter className="size-4" />}
+            >
+              Liste
+            </ViewTab>
+          </div>
+        </div>
 
-          <TabsContent value="liste" className="focus-visible:outline-none">
+        <div className="mt-12">
+          {view === 'grille' ? (
+            <>
+              <PlanningGrille cours={cours} onSelectCours={openDetail} />
+              <DisciplinesLegende cours={cours} />
+            </>
+          ) : (
             <PlanningListe cours={cours} onSelectCours={openDetail} onInscrire={openInscription} />
-          </TabsContent>
-        </Tabs>
+          )}
+        </div>
       </div>
 
       <CoursDetailDialog
@@ -76,6 +113,39 @@ export function PlanningSection({ cours, inscriptionDoc, certificatDoc }: Props)
   )
 }
 
+function ViewTab({
+  value,
+  current,
+  onClick,
+  icon,
+  children,
+}: {
+  value: View
+  current: View
+  onClick: (v: View) => void
+  icon: React.ReactNode
+  children: React.ReactNode
+}) {
+  const active = current === value
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={() => onClick(value)}
+      className={cn(
+        'focus-visible:ring-ring inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold tracking-wide transition-all focus-visible:ring-2 focus-visible:outline-none',
+        active
+          ? 'bg-foreground text-background shadow-sm'
+          : 'text-foreground/65 hover:text-foreground',
+      )}
+    >
+      {icon}
+      <span>{children}</span>
+    </button>
+  )
+}
+
 function DisciplinesLegende({ cours }: { cours: CoursWithDetails[] }) {
   const map = new Map<string, { nom: string; couleur: string }>()
   for (const c of cours) {
@@ -89,18 +159,22 @@ function DisciplinesLegende({ cours }: { cours: CoursWithDetails[] }) {
   if (items.length === 0) return null
 
   return (
-    <ul className="text-muted-foreground mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-      <li className="text-foreground font-medium">Légende :</li>
-      {items.map((d) => (
-        <li key={d.nom} className="flex items-center gap-2">
-          <span
-            aria-hidden="true"
-            className="inline-block size-3 rounded-sm"
-            style={{ backgroundColor: d.couleur }}
-          />
-          {d.nom}
-        </li>
-      ))}
-    </ul>
+    <div className="border-foreground/10 mt-8 border-t border-dashed pt-6">
+      <p className="text-muted-foreground mb-4 font-mono text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+        Légende
+      </p>
+      <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+        {items.map((d) => (
+          <li key={d.nom} className="flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="inline-block size-2.5 rounded-sm"
+              style={{ backgroundColor: d.couleur }}
+            />
+            <span className="text-foreground/80">{d.nom}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

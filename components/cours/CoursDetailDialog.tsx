@@ -77,8 +77,8 @@ export function CoursDetailDialog({ cours, open, onOpenChange, onInscrire }: Pro
         {profNom ? (
           <div className="bg-muted flex items-center gap-3 rounded-lg px-4 py-3">
             {profPhoto ? (
-              <div className="size-16 shrink-0 overflow-hidden rounded-full">
-                <SanityImage value={profPhoto} width={128} height={128} className="size-full" />
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-full">
+                <SanityImage value={profPhoto} fill width={128} height={128} sizes="64px" />
               </div>
             ) : (
               <div className="bg-primary/10 text-primary flex size-16 shrink-0 items-center justify-center rounded-full font-semibold">

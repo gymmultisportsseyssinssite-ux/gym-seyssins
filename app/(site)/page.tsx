@@ -26,8 +26,8 @@ export default async function HomePage() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 45.1631,
-      longitude: 5.6963,
+      latitude: 45.1649,
+      longitude: 5.69,
     },
     ...(settings?.contactEmail ? { email: settings.contactEmail } : {}),
     ...(settings?.contactPhone ? { telephone: settings.contactPhone } : {}),

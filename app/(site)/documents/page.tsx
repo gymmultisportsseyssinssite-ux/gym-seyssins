@@ -51,22 +51,32 @@ export default async function DocumentsPage() {
 
   return (
     <>
-      <section className="bg-card">
-        <div className="container-content py-12 md:py-16">
-          <p className="text-primary text-sm font-medium tracking-wide uppercase">
-            Espace pratique
-          </p>
-          <h1 className="font-display text-foreground mt-3 max-w-3xl text-[length:var(--text-4xl)]">
+      <section className="bg-background relative isolate overflow-hidden pt-16 md:pt-18">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-[-10%] -z-10 h-[400px] w-[400px] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-secondary)_12%,transparent),transparent)] blur-2xl"
+        />
+        <div className="container-content relative pt-2 pb-10 md:pt-3 md:pb-14">
+          <div className="mb-5 flex items-baseline gap-4 md:mb-6">
+            <p className="text-primary shrink-0 text-xs font-semibold tracking-[0.3em] uppercase">
+              — Espace pratique
+            </p>
+            <span
+              aria-hidden="true"
+              className="flex-1 border-t border-dashed border-[color:color-mix(in_oklab,var(--color-primary)_25%,transparent)]"
+            />
+          </div>
+          <h1 className="font-display text-foreground max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] tracking-[-0.025em]">
             Documents et formulaires
           </h1>
-          <p className="text-muted-foreground mt-5 max-w-2xl text-lg">
+          <p className="text-foreground/70 mt-4 max-w-2xl text-base leading-[1.6] md:text-lg">
             Tous les documents nécessaires à votre adhésion et à la vie de l’association.
           </p>
         </div>
       </section>
 
       <section className="bg-background">
-        <div className="container-content py-16 md:py-20">
+        <div className="container-content pb-20 md:pb-28">
           {isEmpty ? (
             <p className="border-border bg-muted/40 text-muted-foreground rounded-[var(--radius-lg)] border border-dashed p-16 text-center">
               Aucun document n’est disponible pour l’instant.

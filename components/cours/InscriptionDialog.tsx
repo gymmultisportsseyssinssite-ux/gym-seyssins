@@ -92,6 +92,8 @@ export function InscriptionDialog({ open, onOpenChange, inscriptionDoc, certific
                     <p className="flex items-start gap-2">
                       <MapPin className="text-primary mt-0.5 size-4 shrink-0" aria-hidden="true" />
                       <span>
+                        {ASSO_ADDRESS.venue}
+                        <br />
                         {ASSO_ADDRESS.street}
                         <br />
                         {ASSO_ADDRESS.postalCode} {ASSO_ADDRESS.city}

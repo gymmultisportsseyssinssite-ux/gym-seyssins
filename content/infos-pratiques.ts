@@ -16,21 +16,21 @@ export const infosPratiquesContent = {
       {
         title: 'En voiture',
         content: [
-          'Les cours se tiennent à la salle des sports de Seyssins. Depuis Grenoble, prendre la direction Seyssins par l’avenue de la République, puis suivre les panneaux « Salle des sports ».',
-          'Le stationnement est gratuit sur le parking adjacent (environ 30 places). En cas d’affluence, un parking complémentaire est disponible à 150 m, rue des Marronniers.',
+          'Les cours se tiennent au Centre Sportif Yves Brouzet à Seyssins. Depuis Grenoble, prendre la direction Seyssins par l’avenue de la République, puis suivre les panneaux indiquant le centre sportif.',
+          'Le stationnement est gratuit sur le parking adjacent. En cas d’affluence, un parking complémentaire est disponible à proximité.',
         ],
       },
       {
         title: 'En transports en commun',
         content: [
-          'La ligne C4 du réseau TAG dessert l’arrêt « Seyssins Mairie » à 5 minutes à pied de la salle.',
+          'La ligne C4 du réseau TAG dessert l’arrêt « Seyssins Mairie » à 5 minutes à pied du centre sportif.',
           'Les lignes 21 et 22 du réseau Métrovélo permettent également de rejoindre Seyssins en vélo en site propre depuis Grenoble.',
         ],
       },
       {
         title: 'Vélo et marche',
         content: [
-          'Un râtelier à vélos est installé devant la salle. Les abords sont sécurisés et adaptés aux modes doux.',
+          'Un râtelier à vélos est installé devant le centre sportif. Les abords sont sécurisés et adaptés aux modes doux.',
         ],
       },
     ] satisfies readonly AccessSection[],
@@ -55,7 +55,7 @@ export const infosPratiquesContent = {
       {
         label: 'Inscriptions',
         date: 'Du 1er au 15 septembre',
-        description: 'Permanences au bureau de l’association, salle des sports.',
+        description: 'Permanences au bureau de l’association, Centre Sportif Yves Brouzet.',
       },
       {
         label: 'Reprise des cours',

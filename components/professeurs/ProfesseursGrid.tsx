@@ -51,15 +51,14 @@ export function ProfesseursGrid({ professeurs }: { professeurs: ProfesseurWithCo
               <Card className="group h-full overflow-hidden p-0 transition-all hover:-translate-y-1 hover:shadow-md">
                 <div className="bg-muted relative aspect-[4/5] w-full overflow-hidden">
                   {p.photo ? (
-                    <div className="size-full transition-transform duration-300 group-hover:scale-[1.03]">
-                      <SanityImage
-                        value={p.photo}
-                        width={600}
-                        height={750}
-                        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 100vw"
-                        className="size-full"
-                      />
-                    </div>
+                    <SanityImage
+                      value={p.photo}
+                      fill
+                      width={600}
+                      height={750}
+                      sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 100vw"
+                      className="transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
                   ) : (
                     <div
                       aria-hidden="true"

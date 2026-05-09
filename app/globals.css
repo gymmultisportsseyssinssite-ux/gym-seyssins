@@ -127,10 +127,10 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-display), ui-serif, Georgia, serif;
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
 
   :focus-visible {

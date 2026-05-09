@@ -3,11 +3,8 @@
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { parseAsArrayOf, parseAsString, useQueryStates } from 'nuqs'
-import { Clock, MapPin, X } from 'lucide-react'
+import { ArrowRight, Clock, MapPin, X } from 'lucide-react'
 
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { SanityImage } from '@/components/shared/SanityImage'
 import {
   JOUR_LABEL,
@@ -29,7 +26,6 @@ type Props = {
 }
 
 export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
-  // Extraire les disciplines uniques présentes
   const disciplinesDispo = useMemo(() => {
     const map = new Map<string, { slug: string; nom: string; couleur: string }>()
     for (const c of cours) {
@@ -71,7 +67,6 @@ export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
     })
   }, [cours, filters])
 
-  // Tri jour puis heure
   const sorted = useMemo(() => {
     return [...filtered].sort((a, b) => {
       const ja = a.jour ? JOURS_ORDRE.indexOf(a.jour) : 99
@@ -84,7 +79,7 @@ export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
   return (
     <div>
       {/* Filtres */}
-      <div className="border-border bg-card rounded-[var(--radius-lg)] border p-4 md:p-5">
+      <div className="bg-background border-foreground/10 rounded-[var(--radius-lg)] border p-5 shadow-[0_20px_40px_-25px_rgba(15,20,25,0.12)] md:p-6">
         <FilterRow label="Discipline">
           {disciplinesDispo.map((d) => (
             <Chip
@@ -112,24 +107,29 @@ export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
           ))}
         </FilterRow>
         {hasFilters ? (
-          <div className="mt-2">
-            <Button variant="ghost" size="sm" onClick={() => setFilters({ d: [], j: [], n: [] })}>
-              <X className="size-4" aria-hidden="true" />
-              Réinitialiser les filtres
-            </Button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setFilters({ d: [], j: [], n: [] })}
+            className="text-foreground/60 hover:text-foreground mt-2 inline-flex items-center gap-1.5 font-mono text-[0.7rem] font-semibold tracking-wider uppercase transition-colors"
+          >
+            <X className="size-3" aria-hidden="true" />
+            Réinitialiser
+          </button>
         ) : null}
       </div>
 
       {/* Annonce du nombre de résultats */}
-      <p aria-live="polite" className="text-muted-foreground mt-6 text-sm" role="status">
-        {sorted.length} cours
-        {hasFilters ? ' filtré' + (sorted.length > 1 ? 's' : '') : ''}
+      <p
+        aria-live="polite"
+        className="text-muted-foreground mt-6 font-mono text-[0.75rem] font-semibold tracking-[0.18em] uppercase"
+        role="status"
+      >
+        {sorted.length} cours{hasFilters ? ' filtré' + (sorted.length > 1 ? 's' : '') : ''}
       </p>
 
       {/* Liste */}
       {sorted.length === 0 ? (
-        <p className="border-border bg-muted/40 text-muted-foreground mt-6 rounded-[var(--radius-lg)] border border-dashed p-10 text-center">
+        <p className="border-foreground/10 bg-background text-muted-foreground mt-6 rounded-[var(--radius-lg)] border border-dashed p-10 text-center">
           Aucun cours ne correspond aux filtres.
         </p>
       ) : (
@@ -138,85 +138,109 @@ export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
             const couleur = c.discipline?.couleur ?? 'var(--color-primary)'
             const profNom = [c.professeur?.prenom, c.professeur?.nom].filter(Boolean).join(' ')
             return (
-              <li key={c._id}>
-                <Card className="grid grid-cols-[6px_1fr] overflow-hidden">
+              <li key={c._id} style={{ ['--c' as string]: couleur }}>
+                <div className="group/card bg-background border-foreground/10 hover:border-[color:color-mix(in_oklab,var(--c)_35%,transparent)] hover:shadow-[0_20px_40px_-20px_color-mix(in_oklab,var(--c)_25%,transparent)] grid grid-cols-[6px_1fr] overflow-hidden rounded-[var(--radius-lg)] border transition-all">
                   <span aria-hidden="true" style={{ backgroundColor: couleur }} />
-                  <div className="grid gap-4 p-5 md:grid-cols-[1fr_auto] md:items-center">
-                    <div>
+                  <div className="grid gap-4 p-6 md:grid-cols-[1fr_auto] md:items-center">
+                    <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         {c.discipline?.nom ? (
-                          <Badge
-                            className="border font-medium"
+                          <span
+                            className="inline-flex items-center rounded-full border px-3 py-1 font-mono text-[0.7rem] font-medium tracking-wider uppercase"
                             style={{
-                              backgroundColor: `${couleur}1F`,
+                              backgroundColor: `color-mix(in oklab, ${couleur} 8%, transparent)`,
                               color: couleur,
-                              borderColor: `${couleur}55`,
+                              borderColor: `color-mix(in oklab, ${couleur} 35%, transparent)`,
                             }}
                           >
                             {c.discipline.nom}
-                          </Badge>
+                          </span>
                         ) : null}
                         {c.discipline?.niveauRequis ? (
-                          <Badge variant="secondary" className="bg-muted text-muted-foreground">
+                          <span className="border-foreground/15 text-foreground/70 inline-flex items-center rounded-full border px-3 py-1 font-mono text-[0.7rem] font-medium tracking-wider uppercase">
                             {NIVEAU_LABEL[c.discipline.niveauRequis]}
-                          </Badge>
+                          </span>
                         ) : null}
                         <StatutBadge statut={c.statut} />
                       </div>
-                      <h3 className="font-display text-foreground mt-2 text-xl">{c.titre}</h3>
-                      <ul className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
+                      <h3 className="font-display text-foreground mt-3 text-xl font-bold tracking-tight md:text-2xl">
+                        {c.titre}
+                      </h3>
+                      <ul className="text-foreground/65 mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm">
                         {c.jour ? (
                           <li className="flex items-center gap-1.5">
-                            <Clock className="size-4" aria-hidden="true" />
-                            {JOUR_LABEL[c.jour]}
-                            {c.heureDebut && c.heureFin ? ` · ${c.heureDebut} – ${c.heureFin}` : ''}
+                            <Clock className="text-primary size-4" aria-hidden="true" />
+                            <span className="text-foreground font-semibold">
+                              {JOUR_LABEL[c.jour]}
+                            </span>
+                            {c.heureDebut && c.heureFin ? (
+                              <span className="text-foreground/65 font-mono text-[0.85rem]">
+                                · {c.heureDebut}–{c.heureFin}
+                              </span>
+                            ) : null}
                           </li>
                         ) : null}
                         {c.lieu ? (
                           <li className="flex items-center gap-1.5">
-                            <MapPin className="size-4" aria-hidden="true" />
-                            {c.lieu}
+                            <MapPin className="text-primary size-4" aria-hidden="true" />
+                            <span>{c.lieu}</span>
                           </li>
                         ) : null}
                       </ul>
                       {profNom ? (
-                        <div className="mt-3 flex items-center gap-2 text-sm">
+                        <div className="mt-4 flex items-center gap-2.5 text-sm">
                           {c.professeur?.photo ? (
-                            <div className="size-8 overflow-hidden rounded-full">
+                            <div className="relative size-8 overflow-hidden rounded-full">
                               <SanityImage
                                 value={c.professeur.photo}
+                                fill
                                 width={64}
                                 height={64}
-                                className="size-full"
+                                sizes="32px"
                               />
                             </div>
                           ) : null}
-                          <span className="text-muted-foreground">Animé par</span>
+                          <span className="text-muted-foreground font-mono text-[0.7rem] tracking-wider uppercase">
+                            Animé par
+                          </span>
                           <Link
                             href="/professeurs"
-                            className="text-foreground hover:text-primary font-medium hover:underline"
+                            className="text-foreground hover:text-primary font-semibold transition-colors"
                           >
                             {profNom}
                           </Link>
                         </div>
                       ) : null}
                       {typeof c.placesRestantes === 'number' && c.placesRestantes > 0 ? (
-                        <p className="text-muted-foreground mt-2 text-xs">
+                        <p className="text-muted-foreground mt-3 font-mono text-[0.7rem] tracking-wider uppercase">
                           {c.placesRestantes} place{c.placesRestantes > 1 ? 's' : ''} restante
                           {c.placesRestantes > 1 ? 's' : ''}
                         </p>
                       ) : null}
                     </div>
                     <div className="flex flex-wrap items-center gap-2 md:flex-col md:items-stretch">
-                      <Button size="sm" onClick={onInscrire} disabled={c.statut === 'complet'}>
-                        S’inscrire
-                      </Button>
-                      <Button size="sm" variant="ghost" onClick={() => onSelectCours(c)}>
+                      <button
+                        type="button"
+                        onClick={onInscrire}
+                        disabled={c.statut === 'complet'}
+                        className="group/btn bg-foreground text-background hover:bg-primary inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all disabled:cursor-not-allowed disabled:opacity-50 md:w-full"
+                      >
+                        <span>S’inscrire</span>
+                        <ArrowRight
+                          className="size-3.5 transition-transform group-hover/btn:translate-x-0.5"
+                          aria-hidden="true"
+                        />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onSelectCours(c)}
+                        className="text-foreground/70 hover:text-foreground inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold tracking-wider uppercase transition-colors md:w-full"
+                      >
                         Voir le détail
-                      </Button>
+                      </button>
                     </div>
                   </div>
-                </Card>
+                </div>
               </li>
             )
           })}
@@ -228,8 +252,8 @@ export function PlanningListe({ cours, onSelectCours, onInscrire }: Props) {
 
 function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="mb-3 last:mb-0">
-      <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
+    <div className="mb-4 last:mb-0">
+      <p className="text-muted-foreground mb-3 font-mono text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
         {label}
       </p>
       <div className="flex flex-wrap gap-2">{children}</div>
@@ -255,16 +279,16 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        'inline-flex h-9 items-center rounded-full border px-3 text-sm font-medium transition-colors',
+        'inline-flex h-9 items-center rounded-full border px-3.5 text-sm font-medium transition-all',
         'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
         active
-          ? 'border-transparent text-white'
-          : 'border-border bg-card text-foreground hover:bg-muted',
+          ? 'border-transparent text-white shadow-sm'
+          : 'border-foreground/15 bg-background text-foreground/80 hover:border-foreground/30',
       )}
       style={
         active
           ? { backgroundColor: couleur, borderColor: couleur }
-          : { borderColor: `${couleur}55` }
+          : { borderColor: `color-mix(in oklab, ${couleur} 25%, transparent)` }
       }
     >
       {children}

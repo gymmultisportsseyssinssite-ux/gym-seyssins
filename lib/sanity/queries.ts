@@ -61,6 +61,7 @@ export const articleBySlugQuery = defineQuery(`
       categorie,
       featured,
       imagePrincipale{ ..., asset->, alt },
+      galerieInline[]{ ..., asset->, alt, legende },
       auteur->{
         _id,
         prenom,

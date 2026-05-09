@@ -149,6 +149,7 @@ export type ArticleListItem = {
 export type ArticleDetail = ArticleListItem & {
   contenu: RichText | null
   auteur: ArticleAuthor | null
+  galerieInline?: SanityImage[] | null
 }
 
 export type ArticleBySlugResult = {

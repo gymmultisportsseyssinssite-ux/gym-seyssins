@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 
-import { CoursHero } from '@/components/sections/cours/CoursHero'
 import { DisciplinesDetailees } from '@/components/sections/cours/DisciplinesDetailees'
-import { InscriptionsBannerWithDialog } from '@/components/sections/cours/InscriptionsBannerWithDialog'
 import { PlanningSection } from '@/components/sections/cours/PlanningSection'
 import { FadeIn } from '@/components/shared/FadeIn'
 import {
@@ -10,7 +8,6 @@ import {
   getCertificatMedicalDocument,
   getDisciplinesWithCours,
   getInscriptionDocument,
-  getSiteSettings,
 } from '@/lib/sanity/fetch'
 import type {
   CoursWithDetails,
@@ -25,8 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function CoursPage() {
-  const [settings, disciplinesRaw, coursRaw, inscriptionDoc, certificatDoc] = await Promise.all([
-    getSiteSettings().catch(() => null),
+  const [disciplinesRaw, coursRaw, inscriptionDoc, certificatDoc] = await Promise.all([
     getDisciplinesWithCours().catch(() => []),
     getAllCours().catch(() => []),
     getInscriptionDocument().catch(() => null),
@@ -40,13 +36,6 @@ export default async function CoursPage() {
 
   return (
     <>
-      <CoursHero />
-      <InscriptionsBannerWithDialog
-        inscriptionsOuvertes={settings?.inscriptionsOuvertes ?? false}
-        inscriptionsMessage={settings?.inscriptionsMessage ?? null}
-        inscriptionDoc={inscription}
-        certificatDoc={certificat}
-      />
       <FadeIn>
         <DisciplinesDetailees disciplines={disciplines} />
       </FadeIn>

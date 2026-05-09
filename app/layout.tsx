@@ -1,19 +1,23 @@
 import type { Metadata } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
+import { Bricolage_Grotesque, Manrope } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SITE } from '@/lib/constants'
 import './globals.css'
 
-const inter = Inter({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+  axes: ['opsz'],
 })
 
-const sourceSerif = Source_Serif_4({
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
+  weight: ['600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -42,9 +46,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${sourceSerif.variable} h-full`}>
+    <html lang="fr" className={`${bricolage.variable} ${manrope.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <NuqsAdapter>{children}</NuqsAdapter>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

@@ -18,7 +18,7 @@ export const inscriptionsContent = {
       number: 3,
       title: 'Déposez le dossier',
       description:
-        'Apportez votre dossier complet aux permanences de rentrée, salle des sports de Seyssins. Vous pouvez aussi l’envoyer par voie postale.',
+        'Apportez votre dossier complet aux permanences de rentrée, Centre Sportif Yves Brouzet à Seyssins. Vous pouvez aussi l’envoyer par voie postale.',
     },
   ] as const,
   permanences: [

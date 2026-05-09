@@ -13,7 +13,8 @@ export const SITE_NAME = SITE.name
 export const SITE_TAGLINE = 'Le sport au cœur de la convivialité'
 
 export const ASSO_ADDRESS = {
-  street: 'Salle des sports — adresse à compléter',
+  venue: 'Centre Sportif Yves Brouzet',
+  street: '1 rue Joseph Moutin',
   postalCode: '38180',
   city: 'Seyssins',
 } as const
@@ -33,7 +34,6 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { label: 'Cours', href: '/cours' },
   { label: 'Professeurs', href: '/professeurs' },
   { label: 'Actualités', href: '/actualites' },
-  { label: 'Galeries', href: '/galeries' },
   { label: 'Contact', href: '/contact' },
 ] as const
 

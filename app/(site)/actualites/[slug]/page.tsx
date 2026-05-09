@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
 import { ArticleCard } from '@/components/actualites/ArticleCard'
+import { ArticleGallery } from '@/components/actualites/ArticleGallery'
 import { ArticleToc } from '@/components/actualites/ArticleToc'
 import { ShareButtons } from '@/components/actualites/ShareButtons'
 import { Badge } from '@/components/ui/badge'
@@ -136,22 +137,23 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     </time>
                   ) : null}
                 </div>
-                <h1 className="font-display text-foreground mt-4 text-[length:var(--text-4xl)] leading-[1.1]">
+                <h1 className="font-display text-foreground mt-4 text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.1] tracking-[-0.025em]">
                   {article.titre}
                 </h1>
                 {article.chapo ? (
-                  <p className="text-muted-foreground mt-5 text-xl">{article.chapo}</p>
+                  <p className="text-foreground/70 mt-5 text-lg leading-[1.55]">{article.chapo}</p>
                 ) : null}
 
                 {auteurNom ? (
                   <div className="border-border mt-8 flex items-center gap-3 border-t pt-6">
                     {article.auteur?.photo ? (
-                      <div className="size-10 overflow-hidden rounded-full">
+                      <div className="relative size-10 overflow-hidden rounded-full">
                         <SanityImage
                           value={article.auteur.photo}
+                          fill
                           width={80}
                           height={80}
-                          className="size-full"
+                          sizes="40px"
                         />
                       </div>
                     ) : (
@@ -189,6 +191,11 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
           </div>
         </div>
       </article>
+
+      {/* Galerie inline (en bas d'article) */}
+      {article.galerieInline && article.galerieInline.length > 0 ? (
+        <ArticleGallery images={article.galerieInline} />
+      ) : null}
 
       {/* Articles liés + retour */}
       <section aria-labelledby="related-title" className="bg-card">

@@ -34,10 +34,18 @@ export function FadeIn({ children, className, delay = 0, as = 'div' }: FadeInPro
           observer.disconnect()
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' },
+      { threshold: 0.05, rootMargin: '0px 0px -5% 0px' },
     )
     observer.observe(node)
-    return () => observer.disconnect()
+
+    // Fallback: si l'observer n'a pas tiré après 800ms (élément déjà dans la vue
+    // mais pas observé pour une raison X), on force l'affichage.
+    const fallback = window.setTimeout(() => setVisible(true), 800)
+
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(fallback)
+    }
   }, [])
 
   const Tag = as as React.ElementType

@@ -32,9 +32,9 @@ export function ArticleCard({ article, large = false }: Props) {
         {article.imagePrincipale ? (
           <SanityImage
             value={article.imagePrincipale}
+            fill
             width={large ? 1200 : 600}
             sizes={large ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 33vw, 100vw'}
-            className="size-full"
           />
         ) : null}
       </div>
@@ -56,8 +56,8 @@ export function ArticleCard({ article, large = false }: Props) {
         </div>
         <h2
           className={cn(
-            'font-display text-foreground group-hover:text-primary mt-3 line-clamp-2 transition-colors',
-            large ? 'text-3xl' : 'text-xl',
+            'font-display text-foreground group-hover:text-primary mt-3 line-clamp-2 font-bold tracking-tight transition-colors',
+            large ? 'text-xl md:text-2xl' : 'text-lg',
           )}
         >
           {article.titre}
@@ -65,8 +65,8 @@ export function ArticleCard({ article, large = false }: Props) {
         {article.chapo ? (
           <p
             className={cn(
-              'text-muted-foreground mt-2 line-clamp-3',
-              large ? 'text-lg' : 'text-base',
+              'text-foreground/65 mt-2 line-clamp-3 leading-[1.55]',
+              large ? 'text-base' : 'text-[0.95rem]',
             )}
           >
             {article.chapo}

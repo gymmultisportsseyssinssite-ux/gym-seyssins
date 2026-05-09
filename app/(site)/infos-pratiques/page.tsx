@@ -20,18 +20,32 @@ export default function InfosPratiquesPage() {
 
   return (
     <>
-      {/* Hero compact */}
-      <section className="bg-card">
-        <div className="container-content py-16 md:py-20">
-          <p className="text-primary text-sm font-medium tracking-wide uppercase">{hero.eyebrow}</p>
-          <h1 className="font-display text-foreground mt-3 max-w-3xl text-[length:var(--text-4xl)]">
+      {/* Hero éditorial compact */}
+      <section className="bg-background relative isolate overflow-hidden pt-16 md:pt-18">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-[-10%] -z-10 h-[400px] w-[400px] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-secondary)_12%,transparent),transparent)] blur-2xl"
+        />
+        <div className="container-content relative pt-2 pb-10 md:pt-3 md:pb-14">
+          <div className="mb-5 flex items-baseline gap-4 md:mb-6">
+            <p className="text-primary shrink-0 text-xs font-semibold tracking-[0.3em] uppercase">
+              — {hero.eyebrow}
+            </p>
+            <span
+              aria-hidden="true"
+              className="flex-1 border-t border-dashed border-[color:color-mix(in_oklab,var(--color-primary)_25%,transparent)]"
+            />
+          </div>
+          <h1 className="font-display text-foreground max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] tracking-[-0.025em]">
             {hero.title}
           </h1>
-          <p className="text-muted-foreground mt-6 max-w-2xl text-lg">{hero.subtitle}</p>
+          <p className="text-foreground/70 mt-4 max-w-2xl text-base leading-[1.6] md:text-lg">
+            {hero.subtitle}
+          </p>
         </div>
       </section>
 
-      <div className="container-content py-16 md:py-24">
+      <div className="container-content pb-20 md:pb-28">
         <div className="mx-auto max-w-[800px]">
           <Accordion type="multiple" className="flex flex-col gap-4">
             {/* Accès */}

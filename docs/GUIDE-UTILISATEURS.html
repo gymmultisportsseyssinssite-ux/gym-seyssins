@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Guide d'utilisation — Gym Multisport Seyssins</title>
+<style>
+  /* ==========================================================
+     Mise en page A4, prête pour Cmd+P → Enregistrer en PDF
+     ========================================================== */
+  @page {
+    size: A4;
+    margin: 22mm 18mm 24mm 18mm;
+    @bottom-center {
+      content: counter(page) " / " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #888;
+    }
+  }
+
+  :root {
+    --primary: #1E5BA8;       /* bleu */
+    --secondary: #E8A547;     /* jaune chaud */
+    --terracotta: #C66B4F;
+    --cream: #FAF7F0;
+    --foreground: #14181D;
+    --muted: #5C6470;
+    --border: #E0DDD4;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11.5pt;
+    line-height: 1.6;
+    color: var(--foreground);
+    background: #fff;
+  }
+
+  /* ----- Couverture (page 1) ----- */
+  .cover {
+    page-break-after: always;
+    height: 247mm; /* approx zone imprimable A4 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(180deg, var(--cream) 0%, #fff 70%);
+    margin: -22mm -18mm 0 -18mm; /* déborder pour effet pleine page */
+    padding: 30mm 24mm;
+    position: relative;
+  }
+
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 60mm; height: 60mm;
+    background: radial-gradient(closest-side, rgba(232, 165, 71, 0.25), transparent);
+    z-index: 0;
+  }
+
+  .cover-eyebrow {
+    font-size: 9pt;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 6mm;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-family: 'Bricolage Grotesque', 'Manrope', sans-serif;
+    font-size: 42pt;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0 0 8mm 0;
+    z-index: 1;
+  }
+
+  .cover-title .accent {
+    color: var(--primary);
+  }
+
+  .cover-subtitle {
+    font-size: 16pt;
+    line-height: 1.4;
+    color: var(--muted);
+    max-width: 130mm;
+    z-index: 1;
+  }
+
+  .cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px dashed var(--border);
+    padding-top: 6mm;
+    font-size: 9pt;
+    color: var(--muted);
+    z-index: 1;
+  }
+
+  .cover-meta {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    letter-spacing: 0.1em;
+  }
+
+  /* ----- Sommaire ----- */
+  .toc {
+    page-break-after: always;
+  }
+
+  .toc h2 {
+    font-family: 'Bricolage Grotesque', 'Manrope', sans-serif;
+    font-size: 22pt;
+    font-weight: 800;
+    margin: 0 0 8mm 0;
+    color: var(--foreground);
+  }
+
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    counter-reset: section;
+  }
+
+  .toc li {
+    counter-increment: section;
+    padding: 3mm 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 11pt;
+  }
+
+  .toc li::before {
+    content: counter(section, decimal-leading-zero) ".";
+    color: var(--primary);
+    font-weight: 600;
+    margin-right: 4mm;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  .toc a {
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  /* ----- Sections ----- */
+  h1 {
+    font-family: 'Bricolage Grotesque', 'Manrope', sans-serif;
+    font-size: 24pt;
+    font-weight: 800;
+    margin: 0 0 6mm 0;
+    color: var(--foreground);
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-family: 'Bricolage Grotesque', 'Manrope', sans-serif;
+    font-size: 18pt;
+    font-weight: 700;
+    margin: 12mm 0 4mm 0;
+    color: var(--primary);
+    line-height: 1.2;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-family: 'Bricolage Grotesque', 'Manrope', sans-serif;
+    font-size: 13pt;
+    font-weight: 700;
+    margin: 8mm 0 3mm 0;
+    color: var(--foreground);
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    margin: 5mm 0 2mm 0;
+    color: var(--foreground);
+  }
+
+  p {
+    margin: 0 0 4mm 0;
+  }
+
+  ul, ol {
+    margin: 0 0 4mm 0;
+    padding-left: 7mm;
+  }
+
+  li {
+    margin-bottom: 1.5mm;
+  }
+
+  strong { font-weight: 700; color: var(--foreground); }
+  em { font-style: italic; color: var(--muted); }
+
+  code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    background: var(--cream);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 10pt;
+    border: 1px solid var(--border);
+  }
+
+  /* Tableaux */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm 0;
+    font-size: 10.5pt;
+    page-break-inside: avoid;
+  }
+
+  thead th {
+    background: var(--cream);
+    color: var(--foreground);
+    text-align: left;
+    padding: 3mm;
+    border-bottom: 2px solid var(--primary);
+    font-weight: 700;
+    font-size: 10pt;
+    letter-spacing: 0.02em;
+  }
+
+  tbody td {
+    padding: 3mm;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) td {
+    background: rgba(250, 247, 240, 0.4);
+  }
+
+  /* Blockquotes / encadrés */
+  blockquote {
+    margin: 4mm 0;
+    padding: 3mm 5mm;
+    border-left: 3px solid var(--secondary);
+    background: rgba(232, 165, 71, 0.08);
+    color: var(--muted);
+    font-size: 10.5pt;
+    border-radius: 0 3px 3px 0;
+  }
+
+  blockquote em { color: var(--muted); }
+
+  /* Encadrés "capture d'écran à insérer" */
+  .screenshot-placeholder {
+    margin: 5mm 0;
+    padding: 12mm;
+    border: 1.5px dashed var(--border);
+    background: var(--cream);
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    border-radius: 4px;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+
+  /* Section principale */
+  .section {
+    page-break-before: always;
+  }
+
+  .section:first-of-type { page-break-before: auto; }
+
+  /* Liste check ✓ / 📞 */
+  .badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .badge-ok {
+    background: rgba(123, 168, 155, 0.2);
+    color: #2D5C4D;
+  }
+
+  .badge-call {
+    background: rgba(198, 107, 79, 0.15);
+    color: var(--terracotta);
+  }
+
+  /* Footer page */
+  .footer-contact {
+    margin-top: 10mm;
+    padding-top: 5mm;
+    border-top: 2px solid var(--primary);
+    font-size: 10pt;
+    color: var(--muted);
+  }
+
+  /* Évite les coupures laides */
+  h2, h3, h4 { page-break-after: avoid; }
+  table, blockquote, .screenshot-placeholder, ul, ol { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<!-- ============== COUVERTURE ============== -->
+<div class="cover">
+  <div>
+    <div class="cover-eyebrow">— Mémo pratique</div>
+    <h1 class="cover-title">
+      Guide<br>
+      <span class="accent">d'utilisation</span>
+    </h1>
+    <p class="cover-subtitle">
+      Comment mettre à jour le site internet de l'association,
+      pas à pas, sans aucune connaissance technique.
+    </p>
+  </div>
+  <div class="cover-footer">
+    <div>Gym Multisport Seyssins<br>Association loi 1901</div>
+    <div class="cover-meta">VERSION 1.0</div>
+  </div>
+</div>
+
+<!-- ============== SOMMAIRE ============== -->
+<section class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#s1">Bienvenue</a></li>
+    <li><a href="#s2">Que puis-je modifier seul ?</a></li>
+    <li><a href="#s3">Se connecter à votre espace</a></li>
+    <li><a href="#s4">Découvrir l'interface</a></li>
+    <li><a href="#s5">Écrire une actualité</a></li>
+    <li><a href="#s6">Modifier le planning des cours</a></li>
+    <li><a href="#s7">Ajouter un professeur</a></li>
+    <li><a href="#s8">Publier une galerie photo</a></li>
+    <li><a href="#s9">Ajouter un document</a></li>
+    <li><a href="#s10">Modifier les réglages</a></li>
+    <li><a href="#s11">Astuces</a></li>
+    <li><a href="#s12">En cas de problème</a></li>
+    <li><a href="#s13">Contacts</a></li>
+  </ol>
+</section>
+
+<!-- ============== 1. BIENVENUE ============== -->
+<section class="section" id="s1">
+  <h1>1. Bienvenue</h1>
+  <p>Ce guide est fait pour vous. Il vous accompagne pas à pas pour mettre à jour le site internet de l'association, sans avoir besoin de compétences techniques.</p>
+  <p>Tout ce qui est décrit ici peut être fait depuis votre ordinateur, sans installer quoi que ce soit. Vous aurez juste besoin de votre adresse Gmail, et d'une connexion internet.</p>
+  <p>Si quelque chose semble bloquer, ne forcez pas — prenez une note, et appelez Greg. <strong>Il n'y a aucun risque de "casser" le site</strong> en suivant ce guide.</p>
+</section>
+
+<!-- ============== 2. QUE PUIS-JE MODIFIER ============== -->
+<section class="section" id="s2">
+  <h1>2. Que puis-je modifier seul ?</h1>
+
+  <h3><span class="badge badge-ok">✓ Autonome</span> Vous pouvez modifier en autonomie</h3>
+  <p>Depuis votre <strong>espace de gestion</strong> (on l'appelle aussi <em>Studio</em>) :</p>
+  <ul>
+    <li>Les <strong>actualités</strong> (articles d'événements passés ou à venir)</li>
+    <li>Le <strong>planning des cours</strong> (jours, heures, professeurs)</li>
+    <li>La <strong>fiche des professeurs</strong> (photo, biographie, disciplines enseignées)</li>
+    <li>Les <strong>galeries photos</strong> (créer un album, ajouter des photos)</li>
+    <li>Les <strong>documents téléchargeables</strong> (fiche d'inscription, règlement intérieur, etc.)</li>
+    <li>Le <strong>bandeau "Inscriptions ouvertes"</strong> affiché en haut du site</li>
+    <li>L'<strong>email</strong> et le <strong>téléphone de contact</strong> affichés sur le site</li>
+  </ul>
+
+  <h3><span class="badge badge-call">📞 Appeler</span> Contactez Greg pour modifier</h3>
+  <ul>
+    <li>L'adresse, les tarifs, les informations pratiques (texte de fond)</li>
+    <li>Le texte de présentation de l'association</li>
+    <li>Les photos de la page d'accueil</li>
+    <li>Tout changement de design, de structure, de couleurs ou de menus</li>
+  </ul>
+
+  <blockquote>
+    La règle simple : si c'est du contenu qui change souvent (actualités, planning, photos d'événements), c'est pour vous. Si c'est la structure du site, c'est pour Greg.
+  </blockquote>
+</section>
+
+<!-- ============== 3. SE CONNECTER ============== -->
+<section class="section" id="s3">
+  <h1>3. Se connecter à votre espace</h1>
+  <ol>
+    <li>Ouvrez votre navigateur internet (Chrome, Firefox, Safari…)</li>
+    <li>Tapez l'adresse : <code>https://gym-seyssin.fr/studio</code></li>
+    <li>Cliquez sur le bouton <strong>"Se connecter avec Google"</strong></li>
+    <li>Choisissez l'adresse Gmail que Greg vous a invitée à utiliser</li>
+    <li>Vous arrivez sur votre espace de gestion. C'est tout 🎉</li>
+  </ol>
+
+  <blockquote><em>Astuce : ajoutez la page en favori dans votre navigateur pour y revenir plus rapidement.</em></blockquote>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : page de connexion</div>
+</section>
+
+<!-- ============== 4. INTERFACE ============== -->
+<section class="section" id="s4">
+  <h1>4. Découvrir l'interface</h1>
+  <p>Une fois connecté(e), vous voyez à <strong>gauche</strong> la liste des grandes catégories de contenu :</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:35%">Menu</th><th>À quoi ça sert</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>📰 <strong>Actualités</strong></td><td>Annoncer un événement, raconter une sortie, partager une nouvelle</td></tr>
+      <tr><td>📅 <strong>Cours</strong></td><td>Voir et modifier le planning hebdomadaire</td></tr>
+      <tr><td>🏃 <strong>Disciplines</strong></td><td>Les types de sport proposés (gym douce, pilates…)</td></tr>
+      <tr><td>👥 <strong>Professeurs</strong></td><td>La liste des intervenants avec leur fiche</td></tr>
+      <tr><td>🖼️ <strong>Galeries photos</strong></td><td>Albums photos d'événements</td></tr>
+      <tr><td>📄 <strong>Documents</strong></td><td>Fichiers PDF à télécharger (inscription, règlement…)</td></tr>
+      <tr><td>⚙️ <strong>Réglages du site</strong></td><td>Email/téléphone de contact, bandeau d'inscription</td></tr>
+    </tbody>
+  </table>
+
+  <p>Au <strong>centre</strong>, vous voyez la liste des éléments existants. À <strong>droite</strong>, le détail de l'élément sur lequel vous cliquez.</p>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : vue générale du Studio avec les menus annotés</div>
+</section>
+
+<!-- ============== 5. ÉCRIRE UNE ACTUALITÉ ============== -->
+<section class="section" id="s5">
+  <h1>5. Écrire une actualité</h1>
+  <p><em>(Le cas le plus fréquent — on prend le temps de bien le détailler.)</em></p>
+
+  <h3>Étape 1 — Ouvrir la liste</h3>
+  <ul><li>Cliquez sur <strong>📰 Actualités</strong> dans le menu de gauche</li></ul>
+
+  <h3>Étape 2 — Créer un nouvel article</h3>
+  <ul>
+    <li>En haut à droite, cliquez sur le bouton <strong>"+ Créer"</strong></li>
+    <li>Un nouveau formulaire vide s'ouvre</li>
+  </ul>
+
+  <h3>Étape 3 — Remplir l'article</h3>
+  <ol>
+    <li><strong>Titre</strong> — Court et clair (ex. <em>"Tournoi de fin d'année — samedi 15 juin"</em>)</li>
+    <li><strong>Slug</strong> — C'est l'adresse internet de l'article. Cliquez sur <strong>"Generate"</strong> pour qu'il se remplisse automatiquement</li>
+    <li><strong>Chapô</strong> — Une ou deux phrases de résumé qui s'afficheront en grand sous le titre</li>
+    <li><strong>Image principale</strong> — Glissez-déposez une photo, ou cliquez pour en choisir une depuis votre ordinateur. Pensez au <strong>texte alternatif</strong> : une description courte de l'image (utile pour les personnes malvoyantes et pour Google)</li>
+    <li><strong>Contenu</strong> — Le corps de l'article. Vous pouvez :
+      <ul>
+        <li>Mettre en <strong>gras</strong> ou en <em>italique</em></li>
+        <li>Créer des titres avec H2, H3</li>
+        <li>Insérer des listes à puces</li>
+        <li>Ajouter des images au milieu du texte</li>
+        <li>Insérer un lien (icône en forme de chaîne)</li>
+      </ul>
+    </li>
+    <li><strong>Catégorie</strong> — Choisissez la catégorie qui correspond (Événement, Compte rendu, Information…)</li>
+    <li><strong>Mettre en avant</strong> <em>(optionnel)</em> — Cochez cette case si vous voulez que l'article apparaisse <strong>en grand</strong> sur la page d'accueil</li>
+    <li><strong>Galerie de photos</strong> <em>(optionnel)</em> — Plusieurs photos additionnelles affichées en bas de l'article. Cliquez sur <strong>"Add item"</strong>, glissez-déposez vos photos une par une (3 minimum recommandé pour un bel effet). Pensez au <strong>texte alternatif</strong> de chaque photo, et éventuellement une <strong>légende</strong> qui s'affichera en visionneuse plein écran</li>
+  </ol>
+
+  <h3>Étape 4 — Publier</h3>
+  <ul>
+    <li>En bas de l'écran, cliquez sur le bouton <strong>"Publish"</strong> (ou <strong>"Publier"</strong>)</li>
+    <li>Si le bouton est grisé, c'est qu'un champ obligatoire manque — il sera signalé en rouge</li>
+  </ul>
+
+  <h3>Étape 5 — Vérifier sur le site</h3>
+  <ul>
+    <li>Ouvrez <code>https://gym-seyssin.fr/actualites</code> dans un nouvel onglet</li>
+    <li>Votre article doit apparaître en haut. Si vous ne le voyez pas immédiatement, attendez 1 minute et rafraîchissez (touche F5)</li>
+  </ul>
+
+  <div class="screenshot-placeholder">📷 Captures d'écran à insérer : formulaire article étape par étape</div>
+</section>
+
+<!-- ============== 6. PLANNING ============== -->
+<section class="section" id="s6">
+  <h1>6. Modifier le planning</h1>
+
+  <h3>Modifier un cours existant</h3>
+  <ul>
+    <li>Allez dans <strong>📅 Cours</strong></li>
+    <li>Cliquez sur le cours à modifier dans la liste</li>
+    <li>Ajustez les champs (jour, heure de début, heure de fin, professeur…)</li>
+    <li>Cliquez sur <strong>"Publish"</strong> pour enregistrer</li>
+  </ul>
+
+  <h3>Créer un nouveau cours</h3>
+  <ul>
+    <li>Allez dans <strong>📅 Cours</strong></li>
+    <li>Cliquez sur <strong>"+ Créer"</strong></li>
+    <li>Remplissez :
+      <ul>
+        <li><strong>Titre</strong> — Ex. <em>"Pilates débutant"</em></li>
+        <li><strong>Discipline</strong> — Choisissez dans la liste</li>
+        <li><strong>Jour de la semaine</strong> — Lundi, mardi…</li>
+        <li><strong>Heure de début / Heure de fin</strong> — Format <code>18:30</code> (chiffres avec deux points)</li>
+        <li><strong>Professeur</strong> — Choisissez dans la liste</li>
+        <li><strong>Niveau</strong> — Tous niveaux, débutant, intermédiaire ou avancé</li>
+      </ul>
+    </li>
+    <li>Cliquez sur <strong>"Publish"</strong></li>
+  </ul>
+
+  <h3>Cas pratiques</h3>
+  <p><strong>"Comment ajouter un nouveau cours en milieu de saison ?"</strong><br>
+  → Suivez la procédure "Créer un nouveau cours" ci-dessus. Le cours apparaîtra automatiquement dans le planning du site.</p>
+
+  <p><strong>"Comment annuler un cours pour la semaine ?"</strong><br>
+  → Pour une annulation ponctuelle, mieux vaut publier une <strong>actualité</strong> (cf. section 5) qui prévient les adhérents. Le cours reste dans le planning de fond.</p>
+
+  <p><strong>"Comment marquer un cours comme complet ?"</strong><br>
+  → Ouvrez le cours, et activez le champ <strong>"Complet"</strong> (case à cocher). Le cours s'affichera grisé sur le site avec la mention "Complet".</p>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : formulaire de cours</div>
+</section>
+
+<!-- ============== 7. PROFESSEUR ============== -->
+<section class="section" id="s7">
+  <h1>7. Ajouter un professeur</h1>
+  <ul>
+    <li>Allez dans <strong>👥 Professeurs</strong></li>
+    <li>Cliquez sur <strong>"+ Créer"</strong></li>
+    <li>Remplissez :
+      <ul>
+        <li><strong>Prénom</strong>, <strong>Nom</strong></li>
+        <li><strong>Photo</strong> — Une photo de <strong>portrait</strong> (visage), de bonne qualité, idéalement carrée ou verticale</li>
+        <li><strong>Biographie</strong> — Quelques lignes pour présenter le parcours</li>
+        <li><strong>Disciplines enseignées</strong> — Cochez celles que la personne anime</li>
+      </ul>
+    </li>
+    <li>Cliquez sur <strong>"Publish"</strong></li>
+  </ul>
+
+  <blockquote><em>Conseil photo : un fond neutre, un cadrage à mi-buste, lumière naturelle. Évitez les photos prises de très loin ou de très près.</em></blockquote>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : fiche professeur</div>
+</section>
+
+<!-- ============== 8. GALERIE ============== -->
+<section class="section" id="s8">
+  <h1>8. Publier une galerie photo</h1>
+  <ul>
+    <li>Allez dans <strong>🖼️ Galeries photos</strong></li>
+    <li>Cliquez sur <strong>"+ Créer"</strong></li>
+    <li>Remplissez :
+      <ul>
+        <li><strong>Titre de la galerie</strong> — Ex. <em>"Tournoi de fin d'année 2026"</em></li>
+        <li><strong>Date de l'événement</strong></li>
+        <li><strong>Photos</strong> — Cliquez sur <strong>"Add"</strong> puis sélectionnez <strong>plusieurs photos d'un coup</strong> (touche Cmd ou Ctrl maintenue)</li>
+        <li><strong>Image de couverture</strong> — Choisissez la photo qui représentera la galerie (vignette d'aperçu)</li>
+        <li><strong>Article lié</strong> <em>(optionnel)</em> — Si vous avez écrit une actualité sur l'événement, vous pouvez la lier ici</li>
+      </ul>
+    </li>
+    <li>Cliquez sur <strong>"Publish"</strong></li>
+  </ul>
+
+  <blockquote><em>Astuce : avant l'upload, redimensionnez les photos en moins de 5 Mo chacune (la plupart des photos de smartphone sont déjà OK). Vous pouvez utiliser le site gratuit https://squoosh.app si besoin.</em></blockquote>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : galerie photo avec upload multiple</div>
+</section>
+
+<!-- ============== 9. DOCUMENT ============== -->
+<section class="section" id="s9">
+  <h1>9. Ajouter un document</h1>
+  <ul>
+    <li>Allez dans <strong>📄 Documents</strong></li>
+    <li>Cliquez sur <strong>"+ Créer"</strong></li>
+    <li>Remplissez :
+      <ul>
+        <li><strong>Titre</strong> — Ex. <em>"Fiche d'inscription saison 2026-2027"</em></li>
+        <li><strong>Catégorie</strong> — Important pour le tri sur le site (Inscription, Règlement, Médical…)</li>
+        <li><strong>Fichier</strong> — Glissez-déposez votre PDF</li>
+      </ul>
+    </li>
+    <li>Cliquez sur <strong>"Publish"</strong></li>
+  </ul>
+  <p>Le document apparaîtra automatiquement sur la page <strong>Documents</strong> du site, classé par catégorie.</p>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : ajout de document</div>
+</section>
+
+<!-- ============== 10. RÉGLAGES ============== -->
+<section class="section" id="s10">
+  <h1>10. Modifier les réglages</h1>
+  <p>C'est ici que vous gérez les éléments qui apparaissent partout sur le site.</p>
+  <ul>
+    <li>Allez dans <strong>⚙️ Réglages du site</strong></li>
+    <li>Vous pouvez modifier :
+      <ul>
+        <li><strong>Inscriptions ouvertes</strong> — Cochez/décochez pour afficher ou masquer le bandeau d'inscription en haut du site</li>
+        <li><strong>Message d'inscription</strong> — Le texte affiché dans le bandeau (ex. <em>"Inscriptions jusqu'au 15 septembre"</em>)</li>
+        <li><strong>Email de contact</strong> — L'adresse qui s'affiche en pied de page et sur la page Contact</li>
+        <li><strong>Téléphone de contact</strong> — Le numéro affiché aux mêmes endroits</li>
+      </ul>
+    </li>
+    <li>Cliquez sur <strong>"Publish"</strong> pour appliquer les changements</li>
+  </ul>
+
+  <div class="screenshot-placeholder">📷 Capture d'écran à insérer : page Réglages</div>
+</section>
+
+<!-- ============== 11. ASTUCES ============== -->
+<section class="section" id="s11">
+  <h1>11. Astuces</h1>
+  <ul>
+    <li>📝 <strong>Toujours mettre un texte alternatif</strong> sur les images : c'est important pour les personnes malvoyantes et pour Google (qui référence mieux votre site)</li>
+    <li>📏 <strong>Garder les titres courts et clairs</strong> — entre 5 et 12 mots</li>
+    <li>👀 <strong>Vérifiez toujours le rendu</strong> sur le site après publication</li>
+    <li>💾 <strong>Pas de panique</strong> : Sanity sauvegarde automatiquement votre travail au fur et à mesure. Même si vous fermez l'onglet par erreur, votre brouillon est conservé</li>
+    <li>⏱️ <strong>Délai d'apparition</strong> : entre la publication et l'affichage sur le site public, il faut compter <strong>moins d'une minute</strong></li>
+  </ul>
+</section>
+
+<!-- ============== 12. PROBLÈMES ============== -->
+<section class="section" id="s12">
+  <h1>12. En cas de problème</h1>
+  <table>
+    <thead><tr><th style="width:38%">Problème</th><th>Solution</th></tr></thead>
+    <tbody>
+      <tr><td><em>"Je ne peux pas me connecter"</em></td><td>Vérifiez que vous utilisez bien le compte Gmail invité par Greg. Si oui, contactez Greg.</td></tr>
+      <tr><td><em>"Mon article n'apparaît pas sur le site"</em></td><td>Patientez 1 minute, puis rafraîchissez la page (F5). Vérifiez aussi qu'il est bien <strong>publié</strong> (et pas seulement en brouillon).</td></tr>
+      <tr><td><em>"J'ai supprimé quelque chose par erreur"</em></td><td>Pas de panique : Sanity garde un historique. Contactez Greg, c'est récupérable.</td></tr>
+      <tr><td><em>"L'image ne charge pas"</em></td><td>Vérifiez que le fichier fait moins de <strong>5 Mo</strong>. Sinon, redimensionnez-la avant.</td></tr>
+      <tr><td><em>"Le bouton Publier est grisé"</em></td><td>Un champ obligatoire est vide. Il sera signalé en rouge dans le formulaire.</td></tr>
+      <tr><td><em>"Tout est en anglais"</em></td><td>L'interface Sanity est en anglais, mais le site lui est bien en français. C'est normal.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============== 13. CONTACTS ============== -->
+<section class="section" id="s13">
+  <h1>13. Contacts</h1>
+
+  <h3>Greg — Support technique</h3>
+  <p>
+    ✉️ <em>[email à compléter]</em><br>
+    📱 <em>[téléphone à compléter]</em>
+  </p>
+
+  <h3>Sanity (éditeur du Studio, en anglais)</h3>
+  <p>🌐 <code>https://www.sanity.io/help</code></p>
+
+  <div class="footer-contact">
+    Document créé pour la Gym Multisport Seyssins — version 1.0<br>
+    Site : <code>https://gym-seyssin.fr</code> · Espace de gestion : <code>https://gym-seyssin.fr/studio</code>
+  </div>
+</section>
+
+</body>
+</html>

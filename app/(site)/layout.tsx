@@ -1,4 +1,5 @@
 import { Footer } from '@/components/layout/Footer'
+import { GlobalInscriptionsBanner } from '@/components/layout/GlobalInscriptionsBanner'
 import { Header } from '@/components/layout/Header'
 import { Toaster } from '@/components/ui/sonner'
 import { getSiteSettings } from '@/lib/sanity/fetch'
@@ -18,6 +19,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header inscriptionsOuvertes={settings?.inscriptionsOuvertes ?? false} />
 
       <main id="main-content" className="flex min-h-screen flex-1 flex-col pt-16 md:pt-[72px]">
+        <GlobalInscriptionsBanner
+          inscriptionsOuvertes={settings?.inscriptionsOuvertes ?? false}
+          inscriptionsMessage={settings?.inscriptionsMessage ?? null}
+        />
         {children}
       </main>
 

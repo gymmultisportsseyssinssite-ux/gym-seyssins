@@ -12,7 +12,7 @@ type MapProps = {
   className?: string
 }
 
-export function Map({ center, zoom = 14, markerLabel = 'Salle des sports', className }: MapProps) {
+export function Map({ center, zoom = 14, markerLabel = 'Centre Sportif Yves Brouzet', className }: MapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<MaplibreMap | null>(null)
 
@@ -64,6 +64,7 @@ export function Map({ center, zoom = 14, markerLabel = 'Salle des sports', class
       role="region"
       aria-label="Carte interactive de localisation"
       className={className}
+      style={{ position: 'relative' }}
     />
   )
 }

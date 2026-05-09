@@ -34,13 +34,8 @@ export function ProfesseurDetailDialog({ professeur, open, onOpenChange }: Props
         <DialogHeader>
           <div className="flex items-center gap-4">
             {professeur.photo ? (
-              <div className="size-16 shrink-0 overflow-hidden rounded-full">
-                <SanityImage
-                  value={professeur.photo}
-                  width={128}
-                  height={128}
-                  className="size-full"
-                />
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-full">
+                <SanityImage value={professeur.photo} fill width={128} height={128} sizes="64px" />
               </div>
             ) : (
               <div className="bg-primary/10 text-primary flex size-16 shrink-0 items-center justify-center rounded-full font-semibold">
