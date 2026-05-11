@@ -32,8 +32,9 @@ export function PlanningSection({ cours, inscriptionDoc, certificatDoc }: Props)
 
   return (
     <section
+      id="planning"
       aria-labelledby="planning-title"
-      className="bg-card relative isolate"
+      className="bg-card relative isolate scroll-mt-24"
     >
       <div className="container-content relative py-20 md:py-28">
         {/* Header éditorial */}

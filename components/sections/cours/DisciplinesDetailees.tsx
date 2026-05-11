@@ -1,4 +1,4 @@
-import { JOUR_LABEL, NIVEAU_LABEL, type DisciplineWithCours } from '@/lib/sanity/types'
+import { NIVEAU_LABEL, type DisciplineWithCours } from '@/lib/sanity/types'
 
 function blocksToText(blocks: unknown): string {
   if (!Array.isArray(blocks)) return ''
@@ -94,40 +94,23 @@ export function DisciplinesDetailees({ disciplines }: { disciplines: DisciplineW
                     <p className="text-foreground/70 mt-4 text-[0.95rem] leading-[1.6]">{desc}</p>
                   ) : null}
 
-                  {/* Créneaux */}
-                  <div className="mt-6 border-t border-dashed border-[color:color-mix(in_oklab,var(--color-foreground)_12%,transparent)] pt-5">
-                    <p className="text-muted-foreground font-mono text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
-                      Créneaux
+                  {/* Footer : compteur de créneaux + lien vers planning */}
+                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-dashed border-[color:color-mix(in_oklab,var(--color-foreground)_12%,transparent)] pt-5">
+                    <p className="text-muted-foreground font-mono text-[0.75rem] tracking-wide">
+                      {d.cours.length > 0
+                        ? `${d.cours.length} créneau${d.cours.length > 1 ? 'x' : ''} / semaine`
+                        : 'Créneaux à venir'}
                     </p>
                     {d.cours.length > 0 ? (
-                      <ul className="mt-3 flex flex-col gap-2 text-sm">
-                        {d.cours.map((c) => (
-                          <li
-                            key={c._id}
-                            className="grid grid-cols-[72px_1fr] items-baseline gap-3"
-                          >
-                            <span className="text-foreground font-semibold">
-                              {c.jour ? JOUR_LABEL[c.jour] : ''}
-                            </span>
-                            <span className="flex flex-col gap-0.5">
-                              <span className="text-foreground/80 font-mono text-[0.85rem]">
-                                {c.heureDebut}
-                                {c.heureFin ? `–${c.heureFin}` : ''}
-                              </span>
-                              {c.professeur?.prenom ? (
-                                <span className="text-muted-foreground text-[0.8rem]">
-                                  {c.professeur.prenom} {c.professeur.nom ?? ''}
-                                </span>
-                              ) : null}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-muted-foreground/80 mt-2 text-[0.85rem] italic">
-                        Créneaux à venir.
-                      </p>
-                    )}
+                      <a
+                        href="#planning"
+                        className="focus-visible:ring-ring inline-flex items-center gap-1.5 rounded-md text-[0.85rem] font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                        style={{ color: couleur }}
+                      >
+                        Voir le planning
+                        <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </li>

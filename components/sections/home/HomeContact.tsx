@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 
 import { homeContent } from '@/content/home'
 import { ASSO_ADDRESS } from '@/lib/constants'
@@ -133,16 +133,16 @@ export function HomeContact({ contactEmail, contactPhone }: HomeContactProps) {
             <div className="mt-10">
               <Link
                 href={contact.cta.href}
-                className="group bg-foreground text-background hover:bg-primary focus-visible:ring-ring focus-visible:ring-offset-card inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all hover:gap-4 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="group bg-foreground text-background hover:bg-primary focus-visible:ring-ring focus-visible:ring-offset-card inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <span>{contact.cta.label}</span>
                 <span className="bg-background/15 group-hover:bg-background/25 relative flex size-7 items-center justify-center overflow-hidden rounded-full transition-colors">
-                  <ArrowRight
-                    className="size-3.5 transition-transform duration-300 group-hover:translate-x-7"
+                  <ArrowUpRight
+                    className="absolute size-3.5 transition-transform duration-300 group-hover:translate-x-3.5 group-hover:-translate-y-3.5"
                     aria-hidden="true"
                   />
-                  <ArrowRight
-                    className="absolute size-3.5 -translate-x-7 transition-transform duration-300 group-hover:translate-x-0"
+                  <ArrowUpRight
+                    className="absolute size-3.5 -translate-x-3.5 translate-y-3.5 transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
                     aria-hidden="true"
                   />
                 </span>

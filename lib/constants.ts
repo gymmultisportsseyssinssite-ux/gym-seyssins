@@ -3,7 +3,9 @@ export const SITE = {
   shortName: 'Gym Seyssins',
   description:
     'Association de gymnastique multisport à Seyssins (Isère). Activités physiques adaptées, conviviales et accessibles à toutes et tous.',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'),
   locale: 'fr-FR',
   city: 'Seyssins',
   department: 'Isère',
