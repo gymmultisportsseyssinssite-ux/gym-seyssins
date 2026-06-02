@@ -65,7 +65,6 @@ export function PlanningGrille({ cours, onSelectCours }: Props) {
     <div className="bg-background border-foreground/10 rounded-[var(--radius-lg)] border p-4 shadow-[0_20px_40px_-25px_rgba(15,20,25,0.15)] md:p-7">
       {/* Mobile : segmented control */}
       <div
-        role="tablist"
         aria-label="Choisir un jour"
         className="-mx-4 mb-4 flex gap-1 overflow-x-auto px-4 pb-1 md:hidden"
       >
@@ -73,8 +72,7 @@ export function PlanningGrille({ cours, onSelectCours }: Props) {
           <button
             key={j}
             type="button"
-            role="tab"
-            aria-selected={jourMobile === j}
+            aria-pressed={jourMobile === j}
             onClick={() => setJourMobile(j)}
             className={cn(
               'inline-flex h-10 shrink-0 items-center rounded-full border px-4 text-sm font-semibold tracking-wide transition-all',

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { CoursHero } from '@/components/sections/cours/CoursHero'
 import { DisciplinesDetailees } from '@/components/sections/cours/DisciplinesDetailees'
 import { PlanningSection } from '@/components/sections/cours/PlanningSection'
 import { FadeIn } from '@/components/shared/FadeIn'
@@ -36,6 +37,7 @@ export default async function CoursPage() {
 
   return (
     <>
+      <CoursHero />
       <FadeIn>
         <DisciplinesDetailees disciplines={disciplines} />
       </FadeIn>

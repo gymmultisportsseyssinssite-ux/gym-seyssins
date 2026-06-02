@@ -58,6 +58,7 @@ function FeaturedArticle({ article }: { article: ArticleCard }) {
   return (
     <Link
       href={href}
+      aria-label={article.titre ? `Lire l’article : ${article.titre}` : undefined}
       className="group focus-visible:ring-ring focus-visible:ring-offset-background block rounded-[var(--radius-lg)] focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-lg)] shadow-[0_30px_60px_-25px_rgba(15,20,25,0.35)]">
@@ -126,6 +127,7 @@ function SecondaryArticle({
   return (
     <Link
       href={href}
+      aria-label={article.titre ? `Lire l’article : ${article.titre}` : undefined}
       className={cn(
         'group focus-visible:ring-ring focus-visible:ring-offset-background flex items-stretch gap-5 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2',
         first ? 'pb-5' : 'py-5',

@@ -18,6 +18,7 @@ export function ArticleCard({ article, large = false }: Props) {
   return (
     <Link
       href={href}
+      aria-label={article.titre ? `Lire l’article : ${article.titre}` : undefined}
       className={cn(
         'group bg-card focus-visible:ring-ring focus-visible:ring-offset-background block overflow-hidden rounded-[var(--radius-lg)] transition-all hover:-translate-y-1 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2',
         large ? 'lg:grid lg:grid-cols-2 lg:gap-0' : '',

@@ -63,7 +63,6 @@ export function PlanningSection({ cours, inscriptionDoc, certificatDoc }: Props)
 
           {/* Toggle vue grille/liste, format pill éditorial */}
           <div
-            role="tablist"
             aria-label="Choisir la vue du planning"
             className="border-foreground/10 bg-background/60 inline-flex shrink-0 items-center gap-1 rounded-full border p-1"
           >
@@ -131,8 +130,7 @@ function ViewTab({
   return (
     <button
       type="button"
-      role="tab"
-      aria-selected={active}
+      aria-pressed={active}
       onClick={() => onClick(value)}
       className={cn(
         'focus-visible:ring-ring inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold tracking-wide transition-all focus-visible:ring-2 focus-visible:outline-none',

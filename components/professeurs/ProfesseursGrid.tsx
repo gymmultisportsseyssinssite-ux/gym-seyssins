@@ -101,7 +101,12 @@ export function ProfesseursGrid({ professeurs }: { professeurs: ProfesseurWithCo
                     </p>
                   ) : null}
                   <div className="mt-4">
-                    <Button variant="link" className="px-0" onClick={() => ouvrir(p)}>
+                    <Button
+                      variant="link"
+                      className="px-0"
+                      onClick={() => ouvrir(p)}
+                      aria-label={`Lire la suite sur ${fullName}`}
+                    >
                       Lire la suite
                     </Button>
                   </div>

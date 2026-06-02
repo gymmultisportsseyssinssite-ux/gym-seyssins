@@ -3,6 +3,7 @@
 Site vitrine de l'association Gym Multisport de Seyssins (Isère, France).
 
 - 🌐 **Site public** : https://gym-seyssin.fr
+- ▲ **Déploiement Vercel** : https://gym-seyssins.vercel.app/
 - 🛠️ **Espace de gestion (Studio)** : https://gym-seyssin.fr/studio
 
 Site géré en autonomie par les membres du bureau via Sanity Studio embarqué pour les parties dynamiques (articles, planning, professeurs, documents, galeries).
